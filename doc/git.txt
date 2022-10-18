@@ -1,0 +1,9 @@
+Commandes git
+=
+
+Création du dépôt (et de la copie locale) : git init xxxx
+Configuration : git config …
+Ajout de fichiers à l’index, et leurs changements pour la prochaine version : git add xxx
+Entériner une nouvelle version : git commit -m "Message pertinent et intéressant"
+Afficher l’historique : git log
+État de la copie locale, du dépôt : git status

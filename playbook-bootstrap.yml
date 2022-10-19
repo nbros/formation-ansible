@@ -27,3 +27,16 @@
           - vim-enhanced
           - tree
         state: present
+- hosts: all
+  become: true
+  tasks:
+    - name: test de connexion utilisateur
+      ping: ~
+    - name: Bétonnage OpenSSH
+      copy:
+        dest: /etc/ssh/sshd_config.d/90_norootpassword
+        content: PermitRootLogin prohibit-password
+    - name: Recharger OpenSSH
+      service:
+        name: sshd
+        state: reloaded

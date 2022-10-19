@@ -1,0 +1,10 @@
+# Mise en place d’apache
+---
+- hosts: mh1
+  name: Mise en place apache et page d’accueil
+  become: true
+  tasks:
+    - name: Package apache
+      yum:
+        name: httpd
+        state: present

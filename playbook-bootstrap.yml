@@ -7,5 +7,11 @@
     - name: Utilisateur gilles
       user:
         name: gilles
+        state: present
         comment: Utilisateur ansible
         shell: /bin/bash
+    - name: Clé SSH
+      authorized_key:
+        user: gilles
+        state: present
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDR0ZyVN0bzmhoF1sZ0+FQVhnErMiUIPUFiqRZIu27as+5ZRk16ESGnvPicIL6rv/jwxCj2nE6R82yZWi0959ffeUo0UY24n2lESLQZkvoJFfrtkly09nk8cCU/lHV0t/5iLV1Q2LJeVmvlit30LSvnMGmY70GT6y7HLTWimoH2mhFeFSJ4bZw2EuzGpoUlfGTdl/Dl1w8F3Cl3uNy9NqQGhim/KzbSZ56ymMw/aoyeln1787jP33T9zfiSIYnh9Ov+qThlxc795rxeHkuRpq0f1CWU7j1tLuIRHvZTyZ9hyfqozR4PeWjVbLjsCg0zjdToNGpoOfi2lcFjfXrza03f eni@ENI24-9010-10

@@ -1,0 +1,11 @@
+# Bootstrapping des VMs : utilisateur standard, clé, sudo
+---
+- hosts: all
+  become: true
+  name: Mise en place utilisateur standard
+  tasks:
+    - name: Utilisateur gilles
+      user:
+        name: gilles
+        comment: Utilisateur ansible
+        shell: /bin/bash

@@ -13,3 +13,13 @@
         name: httpd
         state: started
         enabled: true
+    - name: Ouverture pare-feu port 80
+      firewalld:
+        service: http
+        immediate: true
+        permanent: true
+        state: enabled
+    - name: Page d’accueil
+      copy:
+        dest: /var/www/html/index.html
+        content: Coucou, c’est ansible !

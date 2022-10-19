@@ -19,3 +19,11 @@
       copy:
         dest: /etc/sudoers.d/ansible
         content: "gilles ALL=(ALL) NOPASSWD: ALL"
+    - name: Packages du socle
+      yum:
+        name:
+          - tmux
+          - bash-completion
+          - vim-enhanced
+          - tree
+        state: present

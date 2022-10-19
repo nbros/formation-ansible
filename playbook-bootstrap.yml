@@ -33,10 +33,15 @@
     - name: test de connexion utilisateur
       ping: ~
     - name: Bétonnage OpenSSH
-      copy:
-        dest: /etc/ssh/sshd_config.d/90_norootpassword
-        content: PermitRootLogin prohibit-password
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: PermitRootLogin prohibit-password
+        regexp: ^#?PermitRootLogin .*
+      register: sshd_config
+    - debug:
+        var: sshd_config
     - name: Recharger OpenSSH
       service:
         name: sshd
         state: reloaded
+      when: sshd_config is changed

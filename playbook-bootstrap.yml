@@ -38,8 +38,6 @@
         line: PermitRootLogin prohibit-password
         regexp: ^#?PermitRootLogin .*
       register: sshd_config
-    - debug:
-        var: sshd_config
     - name: Recharger OpenSSH
       service:
         name: sshd

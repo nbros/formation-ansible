@@ -26,13 +26,14 @@
         dest: /etc/motd
         content: |
           Attention, cette machine est gérée par Ansible
+          Distrib : {{ ansible_distribution }} Version : {{ ansible_distribution_version }}
           {{ bootstrap_message | default("J’aime bien chanter quand il fait beau") }}
     - name: Packages du socle
-      yum:
+      package:
         name:
           - tmux
           - bash-completion
-          - vim-enhanced
+          - vim
           - tree
         state: present
 - hosts: all

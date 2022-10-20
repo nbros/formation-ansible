@@ -32,8 +32,10 @@
     - name: Déploiement du site
       file:
         state: directory
-        path: "/var/www/html/{{ webserver_nom_site }}"
+        path: "/var/www/html/{{ item.nom }}"
+      loop: "{{ webserver_sites }}"
     - name: Contenu du site
       copy:
-        dest: "/var/www/html/{{ webserver_nom_site }}/index.html"
-        content: "{{ webserver_contenu_site }}"
+        dest: "/var/www/html/{{ item.nom }}/index.html"
+        content: "{{ item.contenu }}"
+      loop: "{{ webserver_sites }}"

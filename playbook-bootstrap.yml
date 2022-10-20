@@ -6,6 +6,13 @@
   vars:
     bootstrap_username: gilles
   tasks:
+    - setup:
+        filter: ansible_all_ipv4_addresses
+      delegate_to: control
+      delegate_facts: true
+      run_once: true
+    - debug:
+        var: hostvars.control.ansible_all_ipv4_addresses.0
     - name: Utilisateur gilles
       user:
         name: "{{ bootstrap_username }}"
@@ -28,6 +35,7 @@
           Attention, cette machine est gérée par Ansible
           Distrib : {{ ansible_distribution }} Version : {{ ansible_distribution_version }}
           {{ bootstrap_message | default("J’aime bien chanter quand il fait beau") }}
+          
     - name: Packages du socle
       package:
         name:

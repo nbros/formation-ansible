@@ -2,11 +2,5 @@ mh1
 mh2
 control
 
-
 [webservers]
 mh1
-
-[webservers:vars]
-webserver_couleur="green"
-webserver_nom_site="site1"
-webserver_contenu_site="Super Site de fou"

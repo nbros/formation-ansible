@@ -29,3 +29,11 @@
       template:
         dest: /var/www/html/index.html
         src: index.html.jinja
+    - name: Déploiement du site
+      file:
+        state: directory
+        path: "/var/www/html/{{ webserver_nom_site }}"
+    - name: Contenu du site
+      copy:
+        dest: "/var/www/html/{{ webserver_nom_site }}/index.html"
+        content: "{{ webserver_contenu_site }}"

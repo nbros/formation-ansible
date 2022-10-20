@@ -1,3 +1,6 @@
 webserver_couleur: "green"
-webserver_nom_site: "site1"
-webserver_contenu_site: "Super Site de fou"
+webserver_sites:
+  - nom: "site1"
+    contenu: "Super Site de fou"
+  - nom: site2
+    contenu: lalalala

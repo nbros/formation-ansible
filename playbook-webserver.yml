@@ -3,17 +3,5 @@
 - hosts: webservers
   name: Mise en place apache et page d’accueil
   become: true
-  vars:
-    apache_name:
-      Debian: apache2
-      RedHat: httpd
-  handlers:
-    - name: Rechargement firewalld
-      service:
-        name: firewalld
-        state: reloaded
-  tasks:
-    - import_tasks: tasks-webserver-system.yml
-    - import_tasks: tasks-webserver-appli.yml
-      tags:
-        - appli
+  roles:
+    - webserver

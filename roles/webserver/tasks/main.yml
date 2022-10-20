@@ -1,0 +1,4 @@
+- import_tasks: tasks-webserver-system.yml
+- import_tasks: tasks-webserver-appli.yml
+  tags:
+    - appli

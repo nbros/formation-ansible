@@ -3,6 +3,11 @@
 - hosts: mh1
   name: Mise en place apache et page d’accueil
   become: true
+  handlers:
+    - name: Rechargement firewalld
+      service:
+        name: firewalld
+        state: reloaded
   tasks:
     - name: Package apache
       yum:
@@ -16,9 +21,10 @@
     - name: Ouverture pare-feu port 80
       firewalld:
         service: http
-        immediate: true
         permanent: true
         state: enabled
+      notify:
+        - Rechargement firewalld
     - name: Page d’accueil
       copy:
         dest: /var/www/html/index.html

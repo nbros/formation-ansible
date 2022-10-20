@@ -26,7 +26,7 @@
         dest: /etc/motd
         content: |
           Attention, cette machine est gérée par Ansible
-          {{ bootstrap_message }}
+          {{ bootstrap_message | default("J’aime bien chanter quand il fait beau") }}
     - name: Packages du socle
       yum:
         name:

@@ -1,6 +1,6 @@
 # Mise en place d’apache
 ---
-- hosts: mh1
+- hosts: webservers
   name: Mise en place apache et page d’accueil
   become: true
   handlers:
@@ -26,6 +26,6 @@
       notify:
         - Rechargement firewalld
     - name: Page d’accueil
-      copy:
+      template:
         dest: /var/www/html/index.html
-        content: Coucou, c’est ansible !
+        src: index.html.jinja

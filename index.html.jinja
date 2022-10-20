@@ -14,6 +14,23 @@ Proprement : <ul>
 {% for ip in ansible_all_ipv4_addresses %}
 <li>{{ ip }}</li>
 {% endfor %}
+</ul>
+Liste des points de montage
+<ul>
+{% for mp in ansible_mounts %}
+{% if 'snap' not in mp.mount %}
+<li>{{ mp.device }} est monté dans {{ mp.mount }}
+  <ul>
+  {% for info, valeur in mp|dictsort %}
+  <li>
+    {{ info }} : {{ valeur }}
+  </li>
+  {% endfor %}
+  </ul>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
 </p>
 </body>
 </html>

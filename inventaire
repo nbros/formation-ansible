@@ -1,3 +1,6 @@
-mh1
+mh1 bootstrap_message="Pas touche, j’ai dit."
 mh2
 control
+
+[all:vars]
+bootstrap_message="Bonjour les amis"

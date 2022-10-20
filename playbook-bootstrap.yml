@@ -38,6 +38,7 @@
         state: present
 - hosts: all
   become: true
+  name: Conf SSH
   tasks:
     - name: test de connexion utilisateur
       ping: ~

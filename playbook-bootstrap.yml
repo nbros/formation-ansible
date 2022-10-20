@@ -8,11 +8,14 @@
   tasks:
     - setup:
         filter: ansible_all_ipv4_addresses
-      delegate_to: control
+      delegate_to: "{{ item }}"
       delegate_facts: true
       run_once: true
-    - debug:
-        var: hostvars.control.ansible_all_ipv4_addresses.0
+      loop: "{{ groups.all }}"
+      when: '"ansible_all_ipv4_addresses" not in hostvars[item]'
+    - template:
+        src: hosts.jinja
+        dest: /tmp/hosts
     - name: Utilisateur gilles
       user:
         name: "{{ bootstrap_username }}"

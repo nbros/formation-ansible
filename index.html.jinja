@@ -8,5 +8,12 @@
 <p>
 Cette machine est pilotée par Ansible.
 </p>
+<p>
+Voici la liste des IPs de la machine : {{ ansible_all_ipv4_addresses }}
+Proprement : <ul>
+{% for ip in ansible_all_ipv4_addresses %}
+<li>{{ ip }}</li>
+{% endfor %}
+</p>
 </body>
 </html>

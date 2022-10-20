@@ -9,6 +9,12 @@
 Cette machine est pilotée par Ansible.
 </p>
 <p>
+Sites hébergés :
+<ul>
+{% for site in webserver_sites %}
+<li><a href="{{ site.nom }}/">{{ site.nom }}</a></li>
+{% endfor %}
+</ul>
 Voici la liste des IPs de la machine : {{ ansible_all_ipv4_addresses }}
 Proprement : <ul>
 {% for ip in ansible_all_ipv4_addresses %}

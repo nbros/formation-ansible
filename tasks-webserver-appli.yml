@@ -1,0 +1,14 @@
+- name: Page d’accueil
+  template:
+    dest: /var/www/html/index.html
+    src: index.html.jinja
+- name: Déploiement du site
+  file:
+    state: directory
+    path: "/var/www/html/{{ item.nom }}"
+  loop: "{{ webserver_sites }}"
+- name: Contenu du site
+  copy:
+    dest: "/var/www/html/{{ item.nom }}/index.html"
+    content: "{{ item.contenu }}"
+  loop: "{{ webserver_sites }}"

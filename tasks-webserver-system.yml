@@ -1,0 +1,23 @@
+- name: Package apache
+  package:
+    name: "{{ apache_name[ansible_os_family] }}"
+    state: present
+  tags:
+    - system
+- name: Service actif et démarré au boot
+  service:
+    name: "{{ apache_name[ansible_os_family] }}"
+    state: started
+    enabled: true
+  tags:
+    - system
+- name: Ouverture pare-feu port 80
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+  notify:
+    - Rechargement firewalld
+  when: ansible_os_family == 'RedHat'
+  tags:
+    - system   

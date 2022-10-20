@@ -13,34 +13,7 @@
         name: firewalld
         state: reloaded
   tasks:
-    - name: Package apache
-      package:
-        name: "{{ apache_name[ansible_os_family] }}"
-        state: present
-    - name: Service actif et démarré au boot
-      service:
-        name: "{{ apache_name[ansible_os_family] }}"
-        state: started
-        enabled: true
-    - name: Ouverture pare-feu port 80
-      firewalld:
-        service: http
-        permanent: true
-        state: enabled
-      notify:
-        - Rechargement firewalld
-      when: ansible_os_family == 'RedHat'
-    - name: Page d’accueil
-      template:
-        dest: /var/www/html/index.html
-        src: index.html.jinja
-    - name: Déploiement du site
-      file:
-        state: directory
-        path: "/var/www/html/{{ item.nom }}"
-      loop: "{{ webserver_sites }}"
-    - name: Contenu du site
-      copy:
-        dest: "/var/www/html/{{ item.nom }}/index.html"
-        content: "{{ item.contenu }}"
-      loop: "{{ webserver_sites }}"
+    - import_tasks: tasks-webserver-system.yml
+    - import_tasks: tasks-webserver-appli.yml
+      tags:
+        - appli

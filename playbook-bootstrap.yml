@@ -3,22 +3,30 @@
 - hosts: all
   become: true
   name: Mise en place utilisateur standard
+  vars:
+    bootstrap_username: gilles
   tasks:
     - name: Utilisateur gilles
       user:
-        name: gilles
+        name: "{{ bootstrap_username }}"
         state: present
         comment: Utilisateur ansible
         shell: /bin/bash
     - name: Clé SSH
       authorized_key:
-        user: gilles
+        user: "{{ bootstrap_username }}"
         state: present
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDR0ZyVN0bzmhoF1sZ0+FQVhnErMiUIPUFiqRZIu27as+5ZRk16ESGnvPicIL6rv/jwxCj2nE6R82yZWi0959ffeUo0UY24n2lESLQZkvoJFfrtkly09nk8cCU/lHV0t/5iLV1Q2LJeVmvlit30LSvnMGmY70GT6y7HLTWimoH2mhFeFSJ4bZw2EuzGpoUlfGTdl/Dl1w8F3Cl3uNy9NqQGhim/KzbSZ56ymMw/aoyeln1787jP33T9zfiSIYnh9Ov+qThlxc795rxeHkuRpq0f1CWU7j1tLuIRHvZTyZ9hyfqozR4PeWjVbLjsCg0zjdToNGpoOfi2lcFjfXrza03f eni@ENI24-9010-10
     - name: Conf sudo
       copy:
         dest: /etc/sudoers.d/ansible
-        content: "gilles ALL=(ALL) NOPASSWD: ALL"
+        content: "{{ bootstrap_username }} ALL=(ALL) NOPASSWD: ALL"
+    - name: Fichier MOTD
+      copy:
+        dest: /etc/motd
+        content: |
+          Attention, cette machine est gérée par Ansible
+          Pas touche à ma conf !
     - name: Packages du socle
       yum:
         name:

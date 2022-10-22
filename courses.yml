@@ -1,0 +1,9 @@
+# Liste de courses, YAML, c’est l’éclate
+---
+boulangerie:
+  - pain
+apéro:
+  - cacahuètes
+  - bière
+viandes:
+  - saucisson
